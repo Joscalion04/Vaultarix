@@ -1,0 +1,94 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# ========== BACKEND (vaultarix-backend) ==========
+vaultarix-backend/node_modules/
+vaultarix-backend/logs/
+vaultarix-backend/.env
+vaultarix-backend/.env.*
+vaultarix-backend/dist/
+vaultarix-backend/build/
+vaultarix-backend/coverage/
+vaultarix-backend/.nyc_output/
+vaultarix-backend/*.log
+vaultarix-backend/npm-debug.log*
+vaultarix-backend/yarn-debug.log*
+vaultarix-backend/yarn-error.log*
+vaultarix-backend/.npm
+vaultarix-backend/.eslintcache
+vaultarix-backend/.node_repl_history
+vaultarix-backend/*.tgz
+vaultarix-backend/*.tar.gz
+vaultarix-backend/.yarn-integrity
+vaultarix-backend/.cache
+vaultarix-backend/.parcel-cache
+vaultarix-backend/.next/
+vaultarix-backend/.nuxt/
+vaultarix-backend/.vuepress/dist
+vaultarix-backend/.serverless/
+vaultarix-backend/.fusebox/
+vaultarix-backend/.dynamodb/
+vaultarix-backend/.tern-port
+vaultarix-backend/.vscode-test
+vaultarix-backend/dist-ssr/
+vaultarix-backend/*.tsbuildinfo
+vaultarix-backend/*.db
+vaultarix-backend/*.sqlite
+vaultarix-backend/*.sqlite3
+vaultarix-backend/tmp/
+vaultarix-backend/temp/
+
+# ========== FRONTEND (vaultarix-frontend) ==========
+vaultarix-frontend/node_modules/
+vaultarix-frontend/dist/
+vaultarix-frontend/tmp/
+vaultarix-frontend/.angular/cache
+vaultarix-frontend/coverage/
+vaultarix-frontend/.env
+vaultarix-frontend/.env.*
+vaultarix-frontend/npm-debug.log*
+vaultarix-frontend/yarn-debug.log*
+vaultarix-frontend/yarn-error.log*
+vaultarix-frontend/.npm
+vaultarix-frontend/.eslintcache
