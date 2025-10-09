@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    container_name: vaultarix-backend
+    env_file: .env
+    ports:
+      - "443:443"
+    depends_on:
+      - db
+    networks:
+      - vaultarix-net
+
+  frontend:
+    build: ./frontend
+    container_name: vaultarix-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - vaultarix-net
+
+  db:
+    build: ./db
+    container_name: vaultarix-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - vaultarix-net
+
+volumes:
+  db-data:
+
+networks:
+  vaultarix-net:
