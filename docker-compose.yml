@@ -1,40 +1,37 @@
 version: "3.9"
 services:
   backend:
-    build: ./backend
+    build: .
     container_name: vaultarix-backend
     env_file: .env
     ports:
-      - "443:443"
+      - "3000:3000"
     depends_on:
       - db
+    volumes:
+      - ./src:/usr/src/app/src:ro   # en dev puedes montar en modo rw
+    restart: unless-stopped
+    # Se recomienda usar secrets para llaves RSA en producción
+    # secrets:
+    #   - jwt_private
     networks:
-      - vaultarix-net
-
-  frontend:
-    build: ./frontend
-    container_name: vaultarix-frontend
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-    networks:
-      - vaultarix-net
+      - vault-net
 
   db:
-    build: ./db
+    image: postgres:16-alpine
     container_name: vaultarix-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - vaultarix-db-data:/var/lib/postgresql/data
     networks:
-      - vaultarix-net
+      - vault-net
 
 volumes:
-  db-data:
+  vaultarix-db-data:
 
 networks:
-  vaultarix-net:
+  vault-net:
+    driver: bridge
