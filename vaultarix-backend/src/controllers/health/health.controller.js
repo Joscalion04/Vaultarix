@@ -15,7 +15,7 @@
 import os from 'os';
 import fs from 'fs';
 import path from 'path';
-import { getInstanceIdHash } from '../services/cryptoService.js';
+import { getInstanceIdHash } from '../../services/crypto.service.js';
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json')));
 

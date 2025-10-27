@@ -20,8 +20,11 @@ import pino from 'pino';
 import pinoHttp from 'pino-http';
 import fs from 'fs';
 import path from 'path';
-import { router as healthRouter } from './routes/health.js';
-import { initInstanceId } from './services/cryptoService.js';
+import { router as healthRouter } from './routes/health/health.routes.js';
+import { initInstanceId } from './services/crypto.service.js';
+import { authRouter } from './routes/auth/index.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 const app = express();
@@ -52,7 +55,7 @@ initInstanceId(process.env.INSTANCE_SEED || 'default_seed_for_dev');
 
 // Rutas
 app.use('/health', healthRouter);
-
+app.use('/auth', authRouter)
 // Default 404
 app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
