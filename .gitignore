@@ -78,6 +78,7 @@ vaultarix-backend/*.sqlite
 vaultarix-backend/*.sqlite3
 vaultarix-backend/tmp/
 vaultarix-backend/temp/
+vaultarix-backend/src/config/keys/*.pem
 
 # ========== FRONTEND (vaultarix-frontend) ==========
 vaultarix-frontend/node_modules/
