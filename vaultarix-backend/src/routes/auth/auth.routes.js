@@ -1,13 +1,12 @@
 import express from 'express';
-import { login, me } from '../../controllers/auth/auth.controller.js';
+import { login, me, refresh, logout } from '../../controllers/auth/auth.controller.js';
 import { authMiddleware } from '../../middlewares/auth.middleware.js';
 
 export const router = express.Router();
 
-// Endpoint público: login
 router.post('/login', login);
-
-// Endpoint protegido: devuelve info del usuario
+router.post('/refresh', refresh);
+router.post('/logout', logout);
 router.get('/me', authMiddleware, me);
 
 export default router;
