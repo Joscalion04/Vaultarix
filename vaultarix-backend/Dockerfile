@@ -1,22 +1,39 @@
-# Base image con Node.js (alpine para tamaño reducido)
-FROM node:20-alpine
+# =======================================
+# Dockerfile para Vaultarix Backend (Node.js)
+# =======================================
 
-# Crear directorio de la app
+# --- Stage 1: Build ---
+FROM node:20-alpine AS build
+
+# Establecer directorio de trabajo
 WORKDIR /usr/src/app
 
-# Instalar bibliotecas necesarias del sistema para libsodium/argon2 si se requieren
-# Alpine: instalar build tools sólo si es necesario (en producción usar prebuilds)
-RUN apk add --no-cache build-base python3
-
-# Copiar package files y instalar dependencias
+# Copiar package.json y package-lock.json primero (para cache de dependencias)
 COPY package*.json ./
+
+# Instalar dependencias
 RUN npm ci --only=production
 
-# Copiar código
+# Copiar el resto del código fuente
 COPY . .
 
-# Puerto (solo expone el contenedor, el host debe mapearlo en docker-compose)
+# --- Stage 2: Production Image ---
+FROM node:20-alpine
+
+WORKDIR /usr/src/app
+
+# Copiar dependencias desde build
+COPY --from=build /usr/src/app/node_modules ./node_modules
+
+# Copiar código fuente
+COPY --from=build /usr/src/app ./
+
+# Exponer puerto de la API
 EXPOSE 3000
 
-# Recomendación: ejecutar con entornos en producción
+# Variables de entorno por defecto (puedes sobreescribirlas en docker-compose o CLI)
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Comando para iniciar la aplicación en modo producción
 CMD ["node", "src/index.js"]
